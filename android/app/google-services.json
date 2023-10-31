@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "468085733540",
+    "project_id": "book-app-rafi",
+    "storage_bucket": "book-app-rafi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468085733540:android:e263712383ef4a8c8a0e31",
+        "android_client_info": {
+          "package_name": "com.example.book_app_rafi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLNlggp5xRcg3-h0lfAnOOXfSVwf3sawM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
