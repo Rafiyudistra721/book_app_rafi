@@ -9,6 +9,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: 4.6.6
   firebase_core: ^2.20.0
+  firebase_auth: 4.12.0
   flutter: 
     sdk: flutter
 
@@ -19,4 +20,6 @@ dev_dependencies:
 
 flutter: 
   uses-material-design: true
+  assets:
+    - assets/icon/login_icon.png
 
