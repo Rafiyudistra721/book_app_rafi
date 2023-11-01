@@ -1,4 +1,4 @@
-import 'package:book_app_rafi/app/controllers/auth_controller.dart';
+import 'package:book_app_rafi/app/modules/login/controllers/login_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,9 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final authC = Get.put(AuthController(), permanent: true);
+  final authC = Get.put(LoginController(), permanent: true);
+
+  MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
             getPages: AppPages.routes,
           );
         }
-        return CircularProgressIndicator();
+        return const CircularProgressIndicator();
       },
     );
   }
