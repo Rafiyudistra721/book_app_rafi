@@ -10,6 +10,11 @@ dependencies:
   get: 4.6.6
   firebase_core: ^2.20.0
   firebase_auth: 4.12.0
+  cloud_firestore: 4.12.2
+  firebase_storage: 11.4.1
+  nb_utils: 6.0.6
+  intl: 0.18.1
+  convex_bottom_bar: 3.2.0
   flutter: 
     sdk: flutter
 
@@ -19,7 +24,13 @@ dev_dependencies:
     sdk: flutter
 
 flutter: 
-  uses-material-design: true
-  assets:
+  fonts: 
+    - family: Roboto
+      fonts: 
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Bold.ttf
+        - asset: assets/fonts/Roboto-Italic.ttf
+  assets: 
     - assets/icon/login_icon.png
+  uses-material-design: true
 
