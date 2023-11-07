@@ -1,9 +1,8 @@
 // ignore_for_file: avoid_print, prefer_final_fields
 
-
-import 'package:book_app_rafi/app/data/class_model.dart';
+import 'package:book_app_rafi/app/data/Models/user_model.dart';
 import 'package:book_app_rafi/app/routes/app_pages.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,6 +32,13 @@ class LoginController extends GetxController {
   TextEditingController emailC = TextEditingController();
   TextEditingController passwordC = TextEditingController();
   TextEditingController password2C = TextEditingController();
+  RxString _selectedGender = ''.obs;
+  RxString get selectedGender => _selectedGender;
+
+  void setSelectedGender(String value) {
+    _selectedGender = value.obs;
+    update();
+  }
 
   Rx<DateTime?> _selectedDate = DateTime(2000).obs;
   DateTime? get selectedDate => _selectedDate.value;
@@ -93,6 +99,8 @@ class LoginController extends GetxController {
         birthDate: selectedDate,
         image: '',
         time: DateTime.now(),
+        gender: selectedGender.string
+
       );
       UserCredential myUser = await _auth.createUserWithEmailAndPassword(
           email: emailC.text, password: passwordC.text);

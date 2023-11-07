@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:book_app_rafi/app/data/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../integrations/firestore.dart';
+import '../../integrations/firestore.dart';
 
 class UserModel {
   String? id;
@@ -11,6 +11,7 @@ class UserModel {
   String? image;
   DateTime? birthDate;
   DateTime? time;
+  String? gender;
 
   UserModel(
       {this.id,
@@ -19,7 +20,8 @@ class UserModel {
       this.password,
       this.image,
       this.birthDate,
-      this.time});
+      this.time,
+      this.gender});
 
   UserModel fromJson(DocumentSnapshot doc) {
     var json = doc.data() as Map<String, dynamic>?;
@@ -30,7 +32,8 @@ class UserModel {
       password: json?['password'],
       image: json?['image'],
       birthDate: (json?['birthDate'] as Timestamp?)?.toDate(),
-      time: (json?['time'] as Timestamp?)?.toDate()
+      time: (json?['time'] as Timestamp?)?.toDate(),
+      gender: json?['gender']
     );
   }
   Map<String, dynamic> get toJson => {
@@ -40,7 +43,8 @@ class UserModel {
     'password' : password,
     'image' : image,
     'birthDate' : birthDate,
-    'time' : time
+    'time' : time,
+    'gender' : gender
   };
 
   Database db = Database(
@@ -80,25 +84,3 @@ class UserModel {
   }
 }
 
-class BookModel {
-  String? id;
-  String? title;
-  String? category;
-  int? page;
-  int? readPage;
-  String? image;
-  DateTime? time;
-
-  BookModel(
-      {this.id, this.title, this.category, this.page, this.image, this.time});
-}
-
-class ReadModel {
-  String? id;
-  String? bookId;
-  int? prePage;
-  int? newPage;
-  DateTime? time;
-
-  ReadModel({this.id, this.bookId, this.prePage, this.newPage, this.time});
-}

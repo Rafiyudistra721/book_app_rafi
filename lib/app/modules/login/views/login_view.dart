@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, avoid_print
 
 import 'package:book_app_rafi/app/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 
 class LoginView extends GetView<LoginController> {
   GlobalKey<FormState> form = GlobalKey();
-  final authC = Get.find<LoginController>();
+  RxBool visibilityPass = false.obs;
   LoginView({super.key});
   @override
   Widget build(BuildContext context) {
@@ -65,6 +65,7 @@ class LoginView extends GetView<LoginController> {
                                 ),
                                 10.height,
                                 TextFormField(
+                                  obscureText: !visibilityPass.value,
                                   validator: (value) =>
                                       value == null || value == ''
                                           ? 'this field is required'
@@ -72,14 +73,23 @@ class LoginView extends GetView<LoginController> {
                                   controller: controller.passwordC,
                                   keyboardType: TextInputType.visiblePassword,
                                   textInputAction: TextInputAction.done,
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     labelText: 'Password',
-                                    prefixIcon: Icon(Icons.lock),
+                                    prefixIcon: const Icon(Icons.lock),
+                                    suffixIcon: IconButton(
+                                      onPressed: () {
+                                        visibilityPass.value = 
+                                        !visibilityPass.value;
+                                      }, 
+                                      icon: visibilityPass.value
+                                          ? const Icon(Icons.visibility)
+                                          : const Icon(Icons.visibility_off))
                                   ),
                                 ),
                                 10.height,
                                 if (controller.isRegister)
                                   TextFormField(
+                                    obscureText: !visibilityPass.value,
                                     validator: (value) =>
                                         value == null || value == ''
                                             ? 'Confirm Your password'
@@ -87,10 +97,18 @@ class LoginView extends GetView<LoginController> {
                                     controller: controller.password2C,
                                     keyboardType: TextInputType.visiblePassword,
                                     textInputAction: TextInputAction.done,
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       labelText: 'Confirm Password',
                                       prefixIcon:
-                                          Icon(Icons.check_circle_rounded),
+                                          const Icon(Icons.check_circle_rounded),
+                                      suffixIcon: IconButton(
+                                      onPressed: () {
+                                        visibilityPass.value = 
+                                        !visibilityPass.value;
+                                      }, 
+                                      icon: visibilityPass.value
+                                          ? const Icon(Icons.visibility)
+                                          : const Icon(Icons.visibility_off))
                                     ),
                                   ),
                                 10.height,
@@ -115,6 +133,38 @@ class LoginView extends GetView<LoginController> {
                                             ? DateFormat("EEE, dd MMM y")
                                                 .format(controller.selectedDate!)
                                             : '--'),
+                                  ),
+                                if (controller.isRegister)
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const Text("Gender"),
+                                      10.height,
+                                      Row(
+                                        children: [
+                                          Radio<String>(
+                                            value: 'male', 
+                                            groupValue: controller.selectedGender.value, 
+                                            onChanged: (value) {
+                                              controller.selectedGender.value = 
+                                              value ?? '';
+                                            },
+                                            activeColor: colorPrimary,
+                                            ),
+                                            const Text("Male"),
+                                            Radio<String>(
+                                              value: 'female', 
+                                              groupValue: controller.selectedGender.value, 
+                                              onChanged: (value) {
+                                                controller.selectedGender.value = 
+                                                value ?? '';
+                                              },
+                                              activeColor: colorPrimary,
+                                              ),
+                                              const Text("Female")
+                                        ],
+                                      )
+                                    ],
                                   ),
                                 40.height,
                                 Align(
