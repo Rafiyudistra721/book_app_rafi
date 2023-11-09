@@ -11,3 +11,4 @@ FirebaseAuth auth = FirebaseAuth.instance;
 
 const usersCollection = "users";
 const booksCollection = "books";
+const readCollection = "read";

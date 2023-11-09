@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:io';
 
 import 'package:book_app_rafi/app/data/database.dart';
@@ -15,24 +17,31 @@ class BookModel {
   DateTime? time;
 
   BookModel(
-      {this.id, this.title, this.category, this.page, this.image, this.time});
+      {this.id, 
+      this.title, 
+      this.category, 
+      this.page, 
+      this.image, 
+      this.time}
+      );
 
-  BookModel.fromJson(DocumentSnapshot doc) {
-    Map<String, dynamic>? json = doc.data() as Map<String, dynamic>?;
-      id =  doc.id;
-      title = json?['title'];
-      category = json?['category'];
-      page = json?['page'].toInt();
-      readPage = json?['readPage'].toInt();
-      image = json?['image'];
-      time = (json?['time'] as Timestamp?)?.toDate();
+  BookModel fromJson(DocumentSnapshot doc) {
+    var json = doc.data() as Map<String, dynamic>?;
+    return BookModel(
+      id :  doc.id,
+      title : json?['title'],
+      category : json?['category'],
+      page : json?['page'].toInt(),
+      image : json?['image'],
+      time : (json?['time'] as Timestamp?)?.toDate(),
+    );
   }
+
   Map<String, dynamic> get toJson => {
     'id': id,
     'title': title,
     'category': category,
     'page': page,
-    'readPage': readPage,
     'image': image,
     'time': time
   };
@@ -55,21 +64,19 @@ class BookModel {
     (id == null) ? toast("Error Invalid ID") : await db.delete(id!, url: image);
   }
 
-  Stream<List<BookModel>> streamList({int? limit}) async* {
-    var query = db.collectionReference.orderBy("time", descending: true);
-    if (limit is int) {
-      query = query.limit(limit);
+  Stream<List<BookModel>> streamList() async* {
+  var Query = db.collectionReference.orderBy("time", descending: true);
+  yield* Query.snapshots().map((query) {
+    List<BookModel> list = [];
+    for (var doc in query.docs) {
+      list.add(
+        BookModel().fromJson(
+          doc,
+        ),
+      );
     }
-    yield* query.snapshots().map((query) {
-      List<BookModel> list = [];
-      for (var doc in query.docs) {
-        list.add(
-          BookModel.fromJson(
-            doc,
-          ),
-        );
-      }
-      return list;
-    });
-  }
+    return list;
+  });
+}
+
 }

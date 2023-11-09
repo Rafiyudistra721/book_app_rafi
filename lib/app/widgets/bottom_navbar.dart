@@ -25,7 +25,10 @@ class BottomNav extends StatelessWidget {
         if (index == 0) {
           Get.toNamed(Routes.HOME);
         } else if (index == 1) {
-          Get.toNamed(Routes.FORM);
+          Get.defaultDialog(
+            title: 'Reading Form',
+            
+          );
         } else if (index == 2) {
           Get.toNamed(Routes.PROFILE);
         }
