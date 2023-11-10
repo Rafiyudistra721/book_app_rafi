@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:book_app_rafi/app/data/Models/read_model.dart';
 import 'package:book_app_rafi/app/data/database.dart';
 import 'package:book_app_rafi/app/integrations/firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,9 +13,9 @@ class BookModel {
   String? title;
   String? category;
   int? page;
-  int? readPage;
   String? image;
   DateTime? time;
+  ReadModel? readModel;
 
   BookModel(
       {this.id, 
@@ -22,7 +23,8 @@ class BookModel {
       this.category, 
       this.page, 
       this.image, 
-      this.time}
+      this.time, 
+      this.readModel}
       );
 
   BookModel fromJson(DocumentSnapshot doc) {
@@ -34,6 +36,7 @@ class BookModel {
       page : json?['page'].toInt(),
       image : json?['image'],
       time : (json?['time'] as Timestamp?)?.toDate(),
+      readModel : ReadModel().fromJson(doc),
     );
   }
 

@@ -7,7 +7,7 @@ class HomeController extends GetxController {
 
   final RxInt editIndex = (-1).obs;
 
-RxList<BookModel> rxBook = RxList<BookModel>();
+  RxList<BookModel> rxBook = RxList<BookModel>();
   List<BookModel> get listBook => rxBook.value;
   set listBook(List<BookModel> value) => rxBook.value = value;
 

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 import 'package:book_app_rafi/app/data/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

@@ -143,7 +143,15 @@ class BookList extends GetView<HomeController> {
                         style:
                             const TextStyle(color: colorPrimary, fontSize: 12),
                       ),
-                    )
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        "${book.readModel?.prePage ?? ''} / ${book.page ?? ''}",
+                        style: 
+                            const TextStyle(color: colorPrimary, fontSize: 12), 
+                      ),
+                    ),
                   ],
                 ),
               ),

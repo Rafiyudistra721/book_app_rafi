@@ -45,10 +45,10 @@ class HomeView extends GetView<HomeController> {
                               "Hai...",
                               style: TextStyle(color: colorWhite, fontSize: 15),
                             ),
-                            Obx(() => const Text(
-                                  "Username",
-                                  style: TextStyle(
-                                      color: colorWhite, fontSize: 12),
+                            Obx(() => Text(
+                                  authC.user.username ?? '',
+                                  style: const TextStyle(
+                                      color: colorWhite, fontSize: 13),
                                 )),
                           ],
                         ),
